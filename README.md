@@ -1,3 +1,39 @@
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=YOUR-DATABASE-NAME
+DB_USERNAME=YOUR-DATABASE-USERNAME
+DB_PASSWORD=YOUR-DATABASE-PASSWROD
+```
+
+## Run Packages and helpers
+
+You have to all used packages and load helpers as below.
+
+```
+composer install
+npm install
+npm run dev
+npm run build
+```
+
+## Generate new application key
+
+You have to generate new application key as below.
+
+```
+php artisan key:generate
+```
+
+## Run Migrations and Seeders
+
+You have to run all the migration files included with the project and also run seeders as below.
+
+```
+php artisan migrate
+php artisan db:seed
+```
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
@@ -50,18 +86,3 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[byte5](https://byte5.de)**
 - **[OP.GG](https://op.gg)**
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
