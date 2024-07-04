@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
@@ -18,19 +19,35 @@ class TaskController extends Controller
         $task= Task::findOrFail($id);
         return view('show',compact('task'));
     }
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-      $data = $request->validate([
-           'title'=>'required|max:255',
-           'description'=>'required',
-           'long_description'=>'required',
-       ]);
-
-       $task = new Task;
+      $data =$request->validated();
+      /* $task = new Task;
        $task->title = $data['title'];
        $task->description = $data['description'];
        $task->long_description = $data['long_description'];
-       $task->save();
+       $task->save();*/
+       
+       $task = Task::create($request->validated());
        return redirect()->route('tasks')->with('success','Task Created Successfully'); 
+    }
+    
+    public function edit($id)
+    {
+        
+        $task = Task::findOrFail($id);
+        return view('edit',compact('task'));
+    }
+    public function update(TaskRequest $request, $id)
+    {
+       $data = $request->validated();
+        
+        $task = Task::findOrFail($id);
+        $task->title = $data['title'];
+        $task->description = $data['description'];
+        $task->long_description = $data['long_description'];
+        $task->save();
+       return redirect()->route('tasks')->with('success','Task Updated Successfully');
+
     }
 }

@@ -19,9 +19,11 @@ Route::get('/', function () {
 });
 Route::controller(TaskController::class)->prefix('tasks')->group(function(){
     Route::get('/','index')->name('tasks');
-    Route::get('/{id}/show','show')->name('task.show');
     Route::view('/create','create')->name('task.create');
+    Route::get('/{id}/show','show')->name('task.show');
     Route::post('/store','store')->name('task.store');
+    Route::get('/{id}/edit','edit')->name('task.edit');
+    Route::put('/{id}/update','update')->name('task.update');
 
 });
 
