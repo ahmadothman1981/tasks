@@ -9,5 +9,11 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['title', 'description', 'long_description', 'completed'];
+
+   /* public function TaskComplete()
+    {
+        $this->completed = !$this->completd;
+        $this->save();
+    }*/
 }

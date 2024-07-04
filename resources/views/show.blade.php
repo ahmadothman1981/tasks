@@ -13,6 +13,23 @@
 <p>{{$task->created_at}}</p>
 <p>{{$task->updated_at}}</p>
 
+<p>
+    @if($task->completed)
+    completed
+    @else
+    Not completed
+    @endif
+</p>
+<div>
+    <a href="{{route('task.edit',$task->id)}}">Edit</a>
+</div>
+<div>
+    <form action="{{route('task.complete',$task->id)}}" method="post">
+    @csrf
+    @method('PUT')
+    <button type="submit">Mark as {{$task->completed ? 'Not completed' : '  completed'}}</button>
+    </form>
+</div>
 <div>
     <form action="{{route('task.destroy',$task->id)}}" method="post">
     @csrf
