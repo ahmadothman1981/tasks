@@ -3,7 +3,7 @@
 @section('title','List Of Tasks')
 @section('content')
 <nav class="mb-4">
-    <a class="font-medium text-gray-700 underline decoration-pink-500" href="{{route('task.create')}}">Create Task</a>
+    <a class="link" href="{{route('task.create')}}">Create Task</a>
 </nav>
     @forelse($tasks as $task)
 
