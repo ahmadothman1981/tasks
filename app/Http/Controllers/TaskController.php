@@ -27,7 +27,7 @@ class TaskController extends Controller
        $task->description = $data['description'];
        $task->long_description = $data['long_description'];
        $task->save();*/
-       
+
        $task = Task::create($request->validated());
        return redirect()->route('tasks')->with('success','Task Created Successfully'); 
     }
@@ -49,5 +49,12 @@ class TaskController extends Controller
         $task->save();
        return redirect()->route('tasks')->with('success','Task Updated Successfully');
 
+    }
+
+    public function destroy($id)
+    {
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return redirect()->route('tasks')->with('success','Task Deleted Successfully');
     }
 }
