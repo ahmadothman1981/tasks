@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\UpdateTaskRequest;
 
 class TaskController extends Controller
 {
@@ -18,7 +18,8 @@ class TaskController extends Controller
     public function show($id)
     {
         try{
-            $task= Task::findOrFail($id);
+            $task= Task::find($id);
+            return view('show',compact('task'));
         }
         catch(\Throwable $exception){
     
@@ -26,7 +27,7 @@ class TaskController extends Controller
             abort(500);
          }
        
-        return view('show',compact('task'));
+        
     }
     public function store(TaskRequest $request)
     {
@@ -39,6 +40,7 @@ class TaskController extends Controller
        $task->save();*/
 
        $task = Task::create($request->validated());
+       return redirect()->route('tasks')->with('success','Task Created Successfully');
     }
     catch(\Throwable $exception){
     
@@ -47,13 +49,14 @@ class TaskController extends Controller
 
      }
      
-       return redirect()->route('tasks')->with('success','Task Created Successfully'); 
+        
     }
     
     public function edit($id)
     {
         try{
-            $task = Task::findOrFail($id);
+            $task = Task::find($id);
+            return view('edit',compact('task'));
         }
         catch(\Throwable $exception){
     
@@ -61,18 +64,19 @@ class TaskController extends Controller
             abort(500);
         }
         
-        return view('edit',compact('task'));
+       
     }
-    public function update(TaskRequest $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
         try{
        $data = $request->validated();
         
-        $task = Task::findOrFail($id);
+        $task = Task::find($id);
         $task->title = $data['title'];
         $task->description = $data['description'];
         $task->long_description = $data['long_description'];
         $task->save();
+        return redirect()->route('tasks')->with('success','Task Updated Successfully');
         }
         catch(\Throwable $exception){
     
@@ -80,15 +84,16 @@ class TaskController extends Controller
             abort(500);
     
          }
-       return redirect()->route('tasks')->with('success','Task Updated Successfully');
+       
 
     }
 
     public function destroy($id)
     {
         try{
-        $task = Task::findOrFail($id);
+        $task = Task::find($id);
         $task->delete();
+        return redirect()->route('tasks')->with('success','Task Deleted Successfully');
         }
         catch(\Throwable $exception){
     
@@ -96,15 +101,17 @@ class TaskController extends Controller
             abort(500);
     
          }
-        return redirect()->route('tasks')->with('success','Task Deleted Successfully');
+        
     }
 
     public function complete($id)
     {
         try{
-        $task = Task::findOrFail($id);
+        $task = Task::find($id);
         $task->completed = !$task->completed;
         $task->save();
+        return redirect()->back()->with('success','Task Updated Successfully');
+
         }
         catch(\Throwable $exception){
     
@@ -112,6 +119,5 @@ class TaskController extends Controller
             abort(500);
     
          }
-        return redirect()->back()->with('success','Task Updated Successfully');
     }
 }
